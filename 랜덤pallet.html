@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤pallet</title>
+    <style>
+        #content{
+            width: 350px;
+            height: 350px;
+            border-radius: 8px;
+            background: whitesmoke;
+            box-sizing: border-box;
+            margin-top: 15px;
+        }
+    </style>
+    <script src="../js/lib.js"></script>
+    <script>
+        let div;
+        let st;
+        let ch;
+        let flag=false;
+
+        let color=[
+            "rgb(155, 57, 57)",
+            "sandybrown",
+            "palegoldenrod",
+            "yellowgreen",
+            "cornflowerblue",
+            "rgb(0, 43, 63)",
+            "plum"
+        ];
+
+        function colorChange(){
+            if(flag){
+                let r=Math.random();
+                div.style.background=color[getRandom(r*color.length)]
+            }
+        }
+
+        function init(){
+            div=document.getElementById("content");
+            div.style.background=color[0];
+        }
+
+        addEventListener("load", function(){
+            init();
+            st=setInterval("colorChange()", 200); //setInterval은 최초 문서 로드 상태에서 한 번만 작동시켜야 한다. 
+                                                                    //제어 영역에 setInterval을 넣으면 누를 때마다 중복으로 복제돼서 초가 꼬임.
+            ch=document.querySelector("input");
+            ch.addEventListener("click", function(){
+                flag=this.checked; //체크 박스는 자기 스스로 체크=true/ 체크해제=false 로 반환하기 때문에 
+                                            //this로 ch를 받아서 체크박스 true/false를 flag에 대입하게끔 하면 됨.
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="checkbox">
+    <div id="content"></div>
+</body>
+</html>

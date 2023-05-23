@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤한배경색</title>
+    <style>
+        #box{
+            width: 300px;
+            height: 300px;
+            background: silver;
+        }
+    </style>
+    <script>
+        let box;
+        let color=[
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "blue",
+            "navy",
+            "purple"
+        ];
+        let n=0; //배열 안에 들어있는 요소 중 어떤 요소에 접근할지 결정하는 index 변수.
+        let flag=false; //로직을 수행할지 여부를 결정 짓는 논리값
+
+
+        //box 의 색상을 변경해주는 함수
+        function setBg(){
+            if(flag){
+                box.style.background=color[n];
+                //n++; 
+                //n을 랜덤으로 얻기
+                //n++; 를 box 배경 속성보다 나중에 호출하는 이유: 처음부터 n++;를 주면 0번인 red값은 보이지 않고 orange부터 보인다.
+                n=parseInt(Math.random()*color.length);
+            }
+        }
+
+        function init(){
+            box=document.getElementById("box");
+        }
+
+        addEventListener("load", function(){
+            init();
+            setInterval("setBg()", 1000); //for문은 컴퓨터 기본 속도에 따라 호출되기 때문에 처리속도가 매우 빨라서 마지막인 보라색만 보임
+
+        });
+    </script>
+</head>
+<body>
+    <input type="checkbox" id="ch" onClick="flag=this.checked">
+    <div id="box"></div>
+</body>
+</html>
